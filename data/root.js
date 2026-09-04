@@ -1,4 +1,4 @@
-import { Post } from './posts.js';
+import { Post } from '#/repositories/posts.js';
 
 const postsEndpoints = [
   {

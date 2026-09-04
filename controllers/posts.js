@@ -1,4 +1,4 @@
-import { Post } from '#/data/posts.js';
+import { Post } from '#/repositories/posts.js';
 import { validatePostId, validatePostQuery } from '#/validation/posts.js';
 
 export const index = (req, res) => {
@@ -11,16 +11,17 @@ export const index = (req, res) => {
     order,
     _limit,
   });
+
   if (validationError)
     return res.status(400).json({ message: validationError });
 
-  let posts = Post.findAll();
-
-  if (tag) posts = Post.filterByTag(tag, posts);
-  if (search) posts = Post.search(search, posts);
-  if (sortBy === 'id') posts = Post.sortById(order, posts);
-  if (sortBy === 'title') posts = Post.sortByTitle(order, posts);
-  if (_limit) posts = posts.slice(0, Number(_limit));
+  const posts = Post.findAll({
+    tag,
+    search,
+    sortBy,
+    order,
+    _limit: _limit ? Number(_limit) : undefined,
+  });
 
   return res.json(posts);
 };
@@ -29,6 +30,7 @@ export const show = (req, res) => {
   const id = Number(req.params.id);
 
   const idValidationError = validatePostId(id);
+
   if (idValidationError)
     return res.status(400).json({ message: idValidationError });
 
