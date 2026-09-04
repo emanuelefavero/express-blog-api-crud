@@ -48,7 +48,7 @@ export const Post = {
     }
 
     if (_limit) {
-      posts = posts.slice(0, _limit);
+      posts = posts.slice(0, Number(_limit));
     }
 
     return posts;

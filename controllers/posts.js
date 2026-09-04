@@ -2,26 +2,12 @@ import { Post } from '#/repositories/posts.js';
 import { validatePostId, validatePostQuery } from '#/validation/posts.js';
 
 export const index = (req, res) => {
-  const { tag, search, sortBy, order, _limit } = req.query;
-
-  const validationError = validatePostQuery({
-    tag,
-    search,
-    sortBy,
-    order,
-    _limit,
-  });
+  const validationError = validatePostQuery(req.query);
 
   if (validationError)
     return res.status(400).json({ message: validationError });
 
-  const posts = Post.findAll({
-    tag,
-    search,
-    sortBy,
-    order,
-    _limit: _limit ? Number(_limit) : undefined,
-  });
+  const posts = Post.findAll(req.query);
 
   return res.json(posts);
 };
