@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { readJsonFile } from '#/utils/json.js';
+import { readJsonFile, writeJsonFile } from '#/utils/json.js';
 
 const postsFilePath = path.join(import.meta.dirname, '../data/posts.json');
 
@@ -58,5 +58,18 @@ export const Post = {
     const posts = readPosts();
 
     return posts.find((post) => post.id === id);
+  },
+
+  destroy(id) {
+    const posts = readPosts();
+    const postIndex = posts.findIndex((post) => post.id === id);
+
+    if (postIndex === -1) return null;
+
+    const [destroyedPost] = posts.splice(postIndex, 1);
+
+    writeJsonFile(postsFilePath, posts);
+
+    return destroyedPost;
   },
 };

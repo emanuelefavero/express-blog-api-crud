@@ -34,7 +34,13 @@ POST {{baseUrl}}/posts
 PUT {{baseUrl}}/posts/1
 
 ### DELETE post by ID
-DELETE {{baseUrl}}/posts/1
+DELETE {{baseUrl}}/posts/6
+
+### 400 - Invalid post ID when deleting
+DELETE {{baseUrl}}/posts/abc
+
+### 404 - Post to delete not found
+DELETE {{baseUrl}}/posts/999
 
 ### 404
 GET {{baseUrl}}/non-existent

@@ -15,10 +15,10 @@ export const index = (req, res) => {
 export const show = (req, res) => {
   const id = Number(req.params.id);
 
-  const idValidationError = validatePostId(id);
+  const validationError = validatePostId(id);
 
-  if (idValidationError)
-    return res.status(400).json({ message: idValidationError });
+  if (validationError)
+    return res.status(400).json({ message: validationError });
 
   const post = Post.findById(id);
 
@@ -37,6 +37,17 @@ export const update = (req, res) => {
 };
 
 export const destroy = (req, res) => {
-  const { id } = req.params;
-  res.send(`TODO: Eliminazione del post con id: ${id}`);
+  const id = Number(req.params.id);
+
+  const validationError = validatePostId(id);
+
+  if (validationError)
+    return res.status(400).json({ message: validationError });
+
+  const destroyedPost = Post.destroy(id);
+
+  if (!destroyedPost)
+    return res.status(404).json({ message: 'Post non trovato' });
+
+  return res.sendStatus(204);
 };

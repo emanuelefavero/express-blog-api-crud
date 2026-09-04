@@ -10,7 +10,8 @@ http://localhost:3000
 
 ## Response formats
 
-The implemented read endpoints return JSON. Error responses use this structure:
+The implemented endpoints return JSON where a response body is expected. Error
+responses use this structure:
 
 ```json
 {
@@ -18,8 +19,8 @@ The implemented read endpoints return JSON. Error responses use this structure:
 }
 ```
 
-The create, update, and delete endpoints are currently placeholders and return
-plain text.
+The successful delete response has no body. The create and update endpoints are
+currently placeholders and return plain text.
 
 ## Post resource
 
@@ -52,7 +53,7 @@ Example:
 | `GET`    | `/posts/:id` | Get one post by ID           | Implemented    |
 | `POST`   | `/posts`     | Create a post                | Placeholder    |
 | `PUT`    | `/posts/:id` | Update a post                | Placeholder    |
-| `DELETE` | `/posts/:id` | Delete a post                | Placeholder    |
+| `DELETE` | `/posts/:id` | Delete a post                | Implemented    |
 
 ### `GET /`
 
@@ -254,15 +255,48 @@ TODO: Aggiornamento del post con id: 1
 
 ### `DELETE /posts/:id`
 
-This endpoint is a placeholder. It does not currently validate the ID or delete
-a post.
+Deletes the post with the requested ID.
 
-#### Current response (delete)
+#### Path parameters (delete)
 
-Status: `200 OK`
+| Parameter | Type    | Description              |
+| --------- | ------- | ------------------------ |
+| `id`      | integer | Positive post identifier |
 
-```text
-TODO: Eliminazione del post con id: 1
+#### Example request (delete)
+
+```http
+DELETE /posts/1
+```
+
+#### Successful response (delete post)
+
+Status: `204 No Content`
+
+The response has no body.
+
+#### Invalid ID (delete)
+
+Status: `400 Bad Request`
+
+Returned when `id` is not a positive integer.
+
+```json
+{
+  "message": "L'id deve essere un numero intero positivo"
+}
+```
+
+#### Post not found (delete)
+
+Status: `404 Not Found`
+
+Returned when the ID is valid but does not belong to an existing post.
+
+```json
+{
+  "message": "Post non trovato"
+}
 ```
 
 ## Unknown routes
@@ -279,7 +313,7 @@ Status: `404 Not Found`
 
 ## Current implementation notes
 
-- Posts are stored in memory, so there is no database persistence.
+- Posts are stored in `data/posts.json`; changes persist in the local JSON file.
 - Multiple values for the same query parameter are not supported.
 - Empty `tag`, `search`, `sortBy`, `order`, and `_limit` values are currently
   treated as if the parameter had been omitted.
