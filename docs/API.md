@@ -65,18 +65,30 @@ Status: `200 OK`
 ```json
 {
   "message": "Welcome to the Express Blog API",
-  "apiEndpoints": {
-    "posts": {
-      "totalCount": 5,
-      "endpoints": [
+  "endpoints": [
+    {
+      "path": "/",
+      "methods": [
         {
           "method": "GET",
-          "path": "/posts",
+          "description": "Mostra le informazioni generali dell'API"
+        }
+      ]
+    },
+    {
+      "path": "/posts",
+      "methods": [
+        {
+          "method": "GET",
           "description": "Recupera tutti i post"
+        },
+        {
+          "method": "POST",
+          "description": "Crea un nuovo post"
         }
       ]
     }
-  }
+  ]
 }
 ```
 

@@ -1,5 +1,3 @@
-import { Root } from '#/data/root.js';
+import { Root } from '#/repositories/root.js';
 
-export const index = (req, res) => {
-  return res.json(Root.getOverview());
-};
+export const index = (req, res) => res.json(Root.getOverview());
