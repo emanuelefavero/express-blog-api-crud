@@ -39,7 +39,7 @@ Example:
   "id": 1,
   "title": "Ciambellone della domenica",
   "content": "Un ciambellone soffice e semplice, perfetto per la colazione.",
-  "image": "/images/ciambellone.jpeg",
+  "image": "/images/posts/ciambellone.jpeg",
   "tags": ["dolci", "colazione", "ciambellone"]
 }
 ```
@@ -139,7 +139,7 @@ Status: `200 OK`
     "id": 5,
     "title": "Torta paesana della tradizione",
     "content": "La classica torta paesana, ricca e dal sapore rustico.",
-    "image": "/images/torta_paesana.jpeg",
+    "image": "/images/posts/torta_paesana.jpeg",
     "tags": ["dolci", "torta", "tradizione"]
   }
 ]
@@ -197,7 +197,7 @@ Status: `200 OK`
   "id": 1,
   "title": "Ciambellone della domenica",
   "content": "Un ciambellone soffice e semplice, perfetto per la colazione.",
-  "image": "/images/ciambellone.jpeg",
+  "image": "/images/posts/ciambellone.jpeg",
   "tags": ["dolci", "colazione", "ciambellone"]
 }
 ```
