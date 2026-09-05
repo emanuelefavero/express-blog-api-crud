@@ -28,15 +28,15 @@ export const show = (req, res) => {
 };
 
 export const store = (req, res) => {
-  const body = req.body;
-  const post = Post.create(body);
-  res.status(201).location(`/posts/${post.id}`).json(post);
+  const postData = req.body;
+  const createdPost = Post.create(postData);
+  res.status(201).location(`/posts/${createdPost.id}`).json(createdPost);
 };
 
 export const update = (req, res) => {
   const { id } = req.params;
-  const body = req.body;
-  res.json({ message: `Aggiornamento di post: ${id}`, body });
+  const postData = req.body;
+  res.json({ message: `Aggiornamento di post: ${id}`, postData });
 };
 
 export const destroy = (req, res) => {

@@ -60,15 +60,15 @@ export const Post = {
     return posts.find((post) => post.id === id);
   },
 
-  create(body) {
+  create(postData) {
     const posts = readPosts();
 
     const ids = posts.map((post) => post.id);
-    const maxId = ids.length > 0 ? Math.max(...ids) : 1;
+    const maxId = ids.length > 0 ? Math.max(...ids) : 0;
 
     const newPost = {
+      ...postData,
       id: maxId + 1,
-      ...body,
     };
 
     const updatedPosts = [...posts, newPost];
