@@ -28,12 +28,14 @@ export const show = (req, res) => {
 };
 
 export const store = (req, res) => {
-  res.send('TODO: Creazione di un nuovo post');
+  const body = req.body;
+  res.json({ message: 'Creazione di un nuovo post', body });
 };
 
 export const update = (req, res) => {
   const { id } = req.params;
-  res.send(`TODO: Aggiornamento del post con id: ${id}`);
+  const body = req.body;
+  res.json({ message: `TODO: Aggiornamento del post con id: ${id}`, body });
 };
 
 export const destroy = (req, res) => {
