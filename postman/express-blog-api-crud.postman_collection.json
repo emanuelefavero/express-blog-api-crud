@@ -1,7 +1,10 @@
 {
   "info": {
+    "_postman_id": "4393af9c-36fe-4083-8429-f9d4113b3a82",
     "name": "express-blog-api-crud",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13059883",
+    "_collection_link": "https://go.postman.co/collection/13059883-4393af9c-36fe-4083-8429-f9d4113b3a82?source=collection_link"
   },
   "item": [
     {
@@ -14,8 +17,13 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -33,8 +41,12 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ]
             }
           },
           "response": []
@@ -46,8 +58,12 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts?tag=dolci&search=torta&sortBy=title&order=desc",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ],
               "query": [
                 {
                   "key": "tag",
@@ -77,8 +93,12 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts?sortBy=id&order=desc&_limit=2",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ],
               "query": [
                 {
                   "key": "sortBy",
@@ -104,8 +124,12 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts?_limit=abc",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ],
               "query": [
                 {
                   "key": "_limit",
@@ -123,8 +147,12 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts?sortBy=date",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ],
               "query": [
                 {
                   "key": "sortBy",
@@ -142,8 +170,13 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts/abc",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts", "abc"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "abc"
+              ]
             }
           },
           "response": []
@@ -155,8 +188,13 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts/999",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts", "999"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                "999"
+              ]
             }
           },
           "response": []
@@ -168,8 +206,12 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts"
+              ]
             }
           },
           "response": []
@@ -181,8 +223,13 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -200,8 +247,13 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/posts/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["posts", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "posts",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -221,8 +273,12 @@
         "header": [],
         "url": {
           "raw": "{{baseUrl}}/",
-          "host": ["{{baseUrl}}"],
-          "path": [""]
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            ""
+          ]
         }
       },
       "response": []
@@ -234,8 +290,12 @@
         "header": [],
         "url": {
           "raw": "{{baseUrl}}/non-existent",
-          "host": ["{{baseUrl}}"],
-          "path": ["non-existent"]
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "non-existent"
+          ]
         }
       },
       "response": []
