@@ -60,6 +60,24 @@ export const Post = {
     return posts.find((post) => post.id === id);
   },
 
+  create(body) {
+    const posts = readPosts();
+
+    const ids = posts.map((post) => post.id);
+    const maxId = ids.length > 0 ? Math.max(...ids) : 1;
+
+    const newPost = {
+      id: maxId + 1,
+      ...body,
+    };
+
+    const updatedPosts = [...posts, newPost];
+
+    writeJsonFile(postsFilePath, updatedPosts);
+
+    return newPost;
+  },
+
   destroy(id) {
     const posts = readPosts();
     const postIndex = posts.findIndex((post) => post.id === id);
