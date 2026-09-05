@@ -27,7 +27,7 @@ export const show = (req, res) => {
   return res.json(post);
 };
 
-export const create = (req, res) => {
+export const store = (req, res) => {
   res.send('TODO: Creazione di un nuovo post');
 };
 

@@ -19,7 +19,7 @@ responses use this structure:
 }
 ```
 
-The successful delete response has no body. The create and update endpoints are
+The successful delete response has no body. The store and update endpoints are
 currently placeholders and return plain text.
 
 ## Post resource
@@ -229,8 +229,7 @@ Returned when the ID is valid but does not belong to an existing post.
 
 ### `POST /posts`
 
-This endpoint is a placeholder. It does not currently read a request body or
-create a post.
+This endpoint is a placeholder. It does not currently read a request body or create a post.
 
 #### Current response
 
