@@ -47,6 +47,10 @@ export const validatePostData = (postData) => {
     return 'Il body deve essere un oggetto JSON';
   }
 
+  if (Object.hasOwn(postData, 'id')) {
+    return 'Il campo id viene generato dal server e non deve essere inviato';
+  }
+
   const { title, content, image, tags } = postData;
 
   if (typeof title !== 'string' || !title.trim()) {

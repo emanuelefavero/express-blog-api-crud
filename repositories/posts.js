@@ -67,8 +67,8 @@ export const Post = {
     const maxId = ids.length > 0 ? Math.max(...ids) : 0;
 
     const newPost = {
-      ...postData,
       id: maxId + 1,
+      ...postData,
     };
 
     const updatedPosts = [...posts, newPost];
@@ -84,7 +84,7 @@ export const Post = {
 
     if (postIndex === -1) return null;
 
-    const updatedPost = { ...postData, id };
+    const updatedPost = { id, ...postData };
     posts[postIndex] = updatedPost;
 
     writeJsonFile(postsFilePath, posts);
