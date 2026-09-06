@@ -182,7 +182,7 @@ Returns the post with the requested ID.
 | --------- | ------- | ------------------------ |
 | `id`      | integer | Positive post identifier |
 
-#### Example request
+#### Example request (GET post)
 
 ```http
 GET /posts/1
@@ -229,28 +229,71 @@ Returned when the ID is valid but does not belong to an existing post.
 
 ### `POST /posts`
 
-This endpoint is a placeholder. It does not currently read a request body or create a post.
+Creates a new post. The server generates the `id`; the request body must contain
+only `title`, `content`, `image`, and `tags`.
 
-#### Current response
+#### Example request (POST)
 
-Status: `200 OK`
+```json
+{
+  "title": "Scialatielli ai frutti di mare",
+  "content": "Un primo piatto tipico della Costiera Amalfitana.",
+  "image": "/images/posts/scialatielli_frutti_mare.jpeg",
+  "tags": ["primi piatti", "ricette di pesce"]
+}
+```
 
-```text
-TODO: Creazione di un nuovo post
+#### Successful response (create post)
+
+Status: `201 Created`
+
+The response contains the created post and a `Location` header such as
+`/posts/6`.
+
+```json
+{
+  "id": 6,
+  "title": "Scialatielli ai frutti di mare",
+  "content": "Un primo piatto tipico della Costiera Amalfitana.",
+  "image": "/images/posts/scialatielli_frutti_mare.jpeg",
+  "tags": ["primi piatti", "ricette di pesce"]
+}
+```
+
+#### Invalid body
+
+Status: `400 Bad Request`
+
+Returned when a required field is missing or invalid, or the body contains an
+unexpected field. Tags must be an array of non-empty strings.
+
+```json
+{
+  "message": "Il campo title è obbligatorio e deve essere una stringa non vuota"
+}
 ```
 
 ### `PUT /posts/:id`
 
-This endpoint is a placeholder. It does not currently read a request body,
-validate the ID, or update a post.
+Replaces an existing post. The request body follows the same rules as
+`POST /posts`, and all four fields are required.
 
-#### Current response (put)
+#### Successful response (update post)
 
 Status: `200 OK`
 
-```text
-TODO: Aggiornamento del post con id: 1
+```json
+{
+  "id": 1,
+  "title": "Ciambellone aggiornato",
+  "content": "Nuovo contenuto.",
+  "image": "/images/posts/ciambellone.jpeg",
+  "tags": ["dolci", "torte"]
+}
 ```
+
+Invalid IDs and bodies return `400 Bad Request`. A valid ID that does not belong
+to a post returns `404 Not Found`.
 
 ### `DELETE /posts/:id`
 
@@ -314,6 +357,6 @@ Status: `404 Not Found`
 
 - Posts are stored in `data/posts.json`; changes persist in the local JSON file.
 - Multiple values for the same query parameter are not supported.
-- Empty `tag`, `search`, `sortBy`, `order`, and `_limit` values are currently
-  treated as if the parameter had been omitted.
+- A query parameter that is present but empty is invalid and returns
+  `400 Bad Request`.
 - Query parameters that are not recognized are currently ignored.
