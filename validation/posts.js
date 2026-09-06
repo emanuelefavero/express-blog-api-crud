@@ -41,3 +41,44 @@ export const validatePostId = (id) =>
   !Number.isInteger(id) || id <= 0
     ? "L'id deve essere un numero intero positivo"
     : null;
+
+export const validatePostData = (postData) => {
+  if (!postData || typeof postData !== 'object' || Array.isArray(postData)) {
+    return 'Il body deve essere un oggetto JSON';
+  }
+
+  const { title, content, image, tags } = postData;
+
+  if (typeof title !== 'string' || !title.trim()) {
+    return 'Il campo title è obbligatorio e deve essere una stringa non vuota';
+  }
+
+  if (typeof content !== 'string' || !content.trim()) {
+    return 'Il campo content è obbligatorio e deve essere una stringa non vuota';
+  }
+
+  if (typeof image !== 'string' || !image.trim()) {
+    return 'Il campo image deve essere una stringa non vuota';
+  }
+
+  if (!Array.isArray(tags)) {
+    return 'Il campo tags è obbligatorio e deve essere un array';
+  }
+
+  const hasInvalidTag = tags.some(
+    (tag) => typeof tag !== 'string' || !tag.trim(),
+  );
+
+  if (hasInvalidTag) {
+    return 'Tutti i tag devono essere stringhe non vuote';
+  }
+
+  return null;
+};
+
+export const normalizePostData = ({ title, content, image, tags }) => ({
+  title: title.trim(),
+  content: content.trim(),
+  image: image.trim(),
+  tags: tags.map((tag) => tag.trim().toLowerCase()),
+});

@@ -1,5 +1,10 @@
 import { Post } from '#/repositories/posts.js';
-import { validatePostId, validatePostQuery } from '#/validation/posts.js';
+import {
+  normalizePostData,
+  validatePostData,
+  validatePostId,
+  validatePostQuery,
+} from '#/validation/posts.js';
 
 export const index = (req, res) => {
   const validationError = validatePostQuery(req.query);
@@ -28,9 +33,18 @@ export const show = (req, res) => {
 };
 
 export const store = (req, res) => {
-  const postData = req.body;
+  const body = req.body;
+  const validationError = validatePostData(body);
+
+  if (validationError) {
+    return res.status(400).json({ message: validationError });
+  }
+
+  const postData = normalizePostData(body);
+
   const createdPost = Post.create(postData);
-  res.status(201).location(`/posts/${createdPost.id}`).json(createdPost);
+
+  return res.status(201).location(`/posts/${createdPost.id}`).json(createdPost);
 };
 
 export const update = (req, res) => {
