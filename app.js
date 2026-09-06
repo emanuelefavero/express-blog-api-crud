@@ -1,7 +1,6 @@
 import path from 'node:path';
 import express from 'express';
-import { registerPosts } from '#/routes/posts.js';
-import { registerRoot } from '#/routes/root.js';
+import { registerPosts, registerRoot } from '#/resources/index.js';
 
 const PORT = process.env.PORT ?? 3000;
 

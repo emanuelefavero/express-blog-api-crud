@@ -1,10 +1,10 @@
-import { Post } from '#/repositories/posts.js';
+import { Post } from './postsRepository.js';
 import {
   normalizePostData,
   validatePostData,
   validatePostId,
   validatePostQuery,
-} from '#/validation/posts.js';
+} from './postsValidation.js';
 
 export const index = (req, res) => {
   const validationError = validatePostQuery(req.query);

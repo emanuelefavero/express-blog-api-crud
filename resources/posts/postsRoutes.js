@@ -1,4 +1,4 @@
-import { store, destroy, index, show, update } from '#/controllers/posts.js';
+import { destroy, index, show, store, update } from './postsController.js';
 
 export const registerPosts = (app) => {
   app.route('/posts').get(index).post(store);

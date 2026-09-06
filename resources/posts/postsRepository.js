@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { readJsonFile, writeJsonFile } from '#/utils/json.js';
 
-const postsFilePath = path.join(import.meta.dirname, '../data/posts.json');
+const postsFilePath = path.join(import.meta.dirname, '../../data/posts.json');
 
 const readPosts = () => readJsonFile(postsFilePath);
 
