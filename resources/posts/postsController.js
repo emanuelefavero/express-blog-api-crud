@@ -1,29 +1,30 @@
 import { Post } from './postsRepository.js';
 import {
-  normalizePostData,
-  validatePostData,
-  validatePostId,
-  validatePostQuery,
-} from './postsValidation.js';
+  postBodySchema,
+  postParamsSchema,
+  postQuerySchema,
+} from './postsSchemas.js';
 
+const sendValidationError = (res, error) =>
+  res.status(400).json({ message: error.issues[0].message });
+
+// CONTROLLERS
 export const index = (req, res) => {
-  const validationError = validatePostQuery(req.query);
+  const result = postQuerySchema.safeParse(req.query);
 
-  if (validationError)
-    return res.status(400).json({ message: validationError });
+  if (!result.success) return sendValidationError(res, result.error);
 
-  const posts = Post.findAll(req.query);
+  const posts = Post.findAll(result.data);
 
   return res.json(posts);
 };
 
 export const show = (req, res) => {
-  const id = Number(req.params.id);
+  const result = postParamsSchema.safeParse(req.params);
 
-  const validationError = validatePostId(id);
+  if (!result.success) return sendValidationError(res, result.error);
 
-  if (validationError)
-    return res.status(400).json({ message: validationError });
+  const { id } = result.data;
 
   const post = Post.findById(id);
 
@@ -33,36 +34,28 @@ export const show = (req, res) => {
 };
 
 export const store = (req, res) => {
-  const body = req.body;
-  const validationError = validatePostData(body);
+  const result = postBodySchema.safeParse(req.body);
 
-  if (validationError)
-    return res.status(400).json({ message: validationError });
+  if (!result.success) return sendValidationError(res, result.error);
 
-  const postData = normalizePostData(body);
-
-  const createdPost = Post.create(postData);
+  const createdPost = Post.create(result.data);
 
   return res.status(201).location(`/posts/${createdPost.id}`).json(createdPost);
 };
 
 export const update = (req, res) => {
-  const id = Number(req.params.id);
+  const paramsResult = postParamsSchema.safeParse(req.params);
 
-  const idValidationError = validatePostId(id);
+  if (!paramsResult.success)
+    return sendValidationError(res, paramsResult.error);
 
-  if (idValidationError)
-    return res.status(400).json({ message: idValidationError });
+  const bodyResult = postBodySchema.safeParse(req.body);
 
-  const body = req.body;
-  const dataValidationError = validatePostData(body);
+  if (!bodyResult.success) return sendValidationError(res, bodyResult.error);
 
-  if (dataValidationError)
-    return res.status(400).json({ message: dataValidationError });
+  const { id } = paramsResult.data;
 
-  const postData = normalizePostData(body);
-
-  const updatedPost = Post.update(id, postData);
+  const updatedPost = Post.update(id, bodyResult.data);
 
   if (!updatedPost)
     return res.status(404).json({ message: 'Post non trovato' });
@@ -71,12 +64,11 @@ export const update = (req, res) => {
 };
 
 export const destroy = (req, res) => {
-  const id = Number(req.params.id);
+  const result = postParamsSchema.safeParse(req.params);
 
-  const validationError = validatePostId(id);
+  if (!result.success) return sendValidationError(res, result.error);
 
-  if (validationError)
-    return res.status(400).json({ message: validationError });
+  const { id } = result.data;
 
   const destroyedPost = Post.destroy(id);
 

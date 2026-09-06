@@ -5,6 +5,7 @@ const postsFilePath = path.join(import.meta.dirname, '../../data/posts.json');
 
 const readPosts = () => readJsonFile(postsFilePath);
 
+// REPOSITORY
 export const Post = {
   count() {
     return readPosts().length;
