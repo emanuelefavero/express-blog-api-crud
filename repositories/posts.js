@@ -78,6 +78,20 @@ export const Post = {
     return newPost;
   },
 
+  update(id, postData) {
+    const posts = readPosts();
+    const postIndex = posts.findIndex((post) => post.id === id);
+
+    if (postIndex === -1) return null;
+
+    const updatedPost = { ...postData, id };
+    posts[postIndex] = updatedPost;
+
+    writeJsonFile(postsFilePath, posts);
+
+    return updatedPost;
+  },
+
   destroy(id) {
     const posts = readPosts();
     const postIndex = posts.findIndex((post) => post.id === id);

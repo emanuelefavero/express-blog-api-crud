@@ -36,9 +36,8 @@ export const store = (req, res) => {
   const body = req.body;
   const validationError = validatePostData(body);
 
-  if (validationError) {
+  if (validationError)
     return res.status(400).json({ message: validationError });
-  }
 
   const postData = normalizePostData(body);
 
@@ -48,9 +47,27 @@ export const store = (req, res) => {
 };
 
 export const update = (req, res) => {
-  const { id } = req.params;
-  const postData = req.body;
-  res.json({ message: `Aggiornamento di post: ${id}`, postData });
+  const id = Number(req.params.id);
+
+  const idValidationError = validatePostId(id);
+
+  if (idValidationError)
+    return res.status(400).json({ message: idValidationError });
+
+  const body = req.body;
+  const dataValidationError = validatePostData(body);
+
+  if (dataValidationError)
+    return res.status(400).json({ message: dataValidationError });
+
+  const postData = normalizePostData(body);
+
+  const updatedPost = Post.update(id, postData);
+
+  if (!updatedPost)
+    return res.status(404).json({ message: 'Post non trovato' });
+
+  return res.json(updatedPost);
 };
 
 export const destroy = (req, res) => {
