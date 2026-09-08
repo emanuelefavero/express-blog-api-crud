@@ -148,6 +148,6 @@ vite.config.ts.timestamp-*
 .vscode/*
 
 # Agents
-.agents/
+.agents/skills/*
 .playwright-mcp
 .playwright-cli
