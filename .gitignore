@@ -145,9 +145,10 @@ vite.config.ts.timestamp-*
 # Mac OS
 .DS_Store
 
-.vscode/*
-
 # Agents
 .agents/skills/*
 .playwright-mcp
 .playwright-cli
+
+# Local files
+.local/
