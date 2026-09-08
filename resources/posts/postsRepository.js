@@ -1,17 +1,14 @@
-import path from 'node:path';
 import { readJsonFile, writeJsonFile } from '#/utils/json.js';
 
-const postsFilePath = path.join(import.meta.dirname, '../../data/posts.json');
-
-const readPosts = () => readJsonFile(postsFilePath);
-
 // REPOSITORY
-export const Post = {
-  count() {
-    return readPosts().length;
-  },
+export const init = (postsFilePath) => {
+  const readPosts = () => readJsonFile(postsFilePath);
 
-  findAll({ tag, search, sortBy, order = 'asc', _limit } = {}) {
+  const count = () => {
+    return readPosts().length;
+  };
+
+  const findAll = ({ tag, search, sortBy, order = 'asc', _limit } = {}) => {
     let posts = readPosts();
 
     if (tag) {
@@ -53,15 +50,15 @@ export const Post = {
     }
 
     return posts;
-  },
+  };
 
-  findById(id) {
+  const findById = (id) => {
     const posts = readPosts();
 
     return posts.find((post) => post.id === id);
-  },
+  };
 
-  create(postData) {
+  const create = (postData) => {
     const posts = readPosts();
 
     const ids = posts.map((post) => post.id);
@@ -77,9 +74,9 @@ export const Post = {
     writeJsonFile(postsFilePath, updatedPosts);
 
     return newPost;
-  },
+  };
 
-  update(id, postData) {
+  const update = (id, postData) => {
     const posts = readPosts();
     const postIndex = posts.findIndex((post) => post.id === id);
 
@@ -91,9 +88,9 @@ export const Post = {
     writeJsonFile(postsFilePath, posts);
 
     return updatedPost;
-  },
+  };
 
-  destroy(id) {
+  const destroy = (id) => {
     const posts = readPosts();
     const postIndex = posts.findIndex((post) => post.id === id);
 
@@ -104,5 +101,7 @@ export const Post = {
     writeJsonFile(postsFilePath, posts);
 
     return destroyedPost;
-  },
+  };
+
+  return { count, findAll, findById, create, update, destroy };
 };
