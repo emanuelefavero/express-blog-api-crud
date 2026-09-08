@@ -1,4 +1,4 @@
-import { Post } from './postsRepository.js';
+import * as postsRepository from './postsRepository.js';
 import {
   postBodySchema,
   postParamsSchema,
@@ -14,7 +14,7 @@ export const index = (req, res) => {
 
   if (!result.success) return sendValidationError(res, result.error);
 
-  const posts = Post.findAll(result.data);
+  const posts = postsRepository.findAll(result.data);
 
   return res.json(posts);
 };
@@ -26,7 +26,7 @@ export const show = (req, res) => {
 
   const { id } = result.data;
 
-  const post = Post.findById(id);
+  const post = postsRepository.findById(id);
 
   if (!post) return res.status(404).json({ message: 'Post non trovato' });
 
@@ -38,7 +38,7 @@ export const store = (req, res) => {
 
   if (!result.success) return sendValidationError(res, result.error);
 
-  const createdPost = Post.create(result.data);
+  const createdPost = postsRepository.create(result.data);
 
   return res.status(201).location(`/posts/${createdPost.id}`).json(createdPost);
 };
@@ -55,7 +55,7 @@ export const update = (req, res) => {
 
   const { id } = paramsResult.data;
 
-  const updatedPost = Post.update(id, bodyResult.data);
+  const updatedPost = postsRepository.update(id, bodyResult.data);
 
   if (!updatedPost)
     return res.status(404).json({ message: 'Post non trovato' });
@@ -70,7 +70,7 @@ export const destroy = (req, res) => {
 
   const { id } = result.data;
 
-  const destroyedPost = Post.destroy(id);
+  const destroyedPost = postsRepository.destroy(id);
 
   if (!destroyedPost)
     return res.status(404).json({ message: 'Post non trovato' });

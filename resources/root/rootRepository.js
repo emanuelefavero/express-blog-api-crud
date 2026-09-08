@@ -5,8 +5,4 @@ const rootFilePath = path.join(import.meta.dirname, '../../data/root.json');
 
 const readRoot = () => readJsonFile(rootFilePath);
 
-export const Root = {
-  getOverview() {
-    return readRoot();
-  },
-};
+export const getOverview = () => readRoot();

@@ -1,3 +1,3 @@
-import { Root } from './rootRepository.js';
+import * as rootRepository from './rootRepository.js';
 
-export const index = (req, res) => res.json(Root.getOverview());
+export const index = (req, res) => res.json(rootRepository.getOverview());
