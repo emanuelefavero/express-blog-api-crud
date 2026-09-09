@@ -341,6 +341,18 @@ Returned when the ID is valid but does not belong to an existing post.
 }
 ```
 
+## Error demonstration routes
+
+These exercise routes deliberately trigger the error middleware and do not
+modify posts. Both log the original error in the terminal.
+
+| Method | Path                  | Status | JSON response                            |
+| ------ | --------------------- | ------ | ---------------------------------------- |
+| `GET`  | `/errors`             | `500`  | `{ "message": "Internal Server Error" }` |
+| `GET`  | `/errors/unavailable` | `503`  | `{ "message": "Service Unavailable" }`   |
+
+Use the requests in `test.http` to try them.
+
 ## Unknown routes
 
 Requests that do not match an existing route return:

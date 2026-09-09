@@ -69,3 +69,6 @@ Content-Type: application/json; charset=iso-8859-1
 
 ### 500 - Internal Server Error (error handler middleware)
 GET {{baseUrl}}/errors
+
+### 503 - Service Unavailable (error handler middleware)
+GET {{baseUrl}}/errors/unavailable

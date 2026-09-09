@@ -11,7 +11,7 @@ export const errorHandler = (err, req, res, next) => {
 
   const message =
     status >= 500
-      ? 'Internal Server Error'
+      ? STATUS_CODES[status] || 'Internal Server Error'
       : err.message || STATUS_CODES[status] || 'Unknown Error';
 
   if (status >= 500) console.error(err);

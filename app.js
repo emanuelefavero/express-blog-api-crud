@@ -19,10 +19,6 @@ registerPosts(app);
 registerRoot(app);
 registerErrors(app);
 
-// app.get('/errors', (req, res) => {
-//   throw new Error('This is a test error');
-// });
-
 app.use(middleware.notFound); // 404
 app.use(middleware.errorHandler); // Error handler
 
