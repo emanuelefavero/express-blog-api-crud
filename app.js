@@ -1,6 +1,11 @@
 import path from 'node:path';
 import express from 'express';
-import { registerPosts, registerRoot } from '#/resources/index.js';
+import * as middleware from './middleware/index.js';
+import {
+  registerErrors,
+  registerPosts,
+  registerRoot,
+} from './resources/index.js';
 
 const PORT = process.env.PORT ?? 3000;
 
@@ -12,8 +17,14 @@ app.use(express.static(path.join(import.meta.dirname, 'public')));
 
 registerPosts(app);
 registerRoot(app);
+registerErrors(app);
 
-app.use((_, res) => res.status(404).json({ message: 'Not Found' })); // 404
+// app.get('/errors', (req, res) => {
+//   throw new Error('This is a test error');
+// });
+
+app.use(middleware.notFound); // 404
+app.use(middleware.errorHandler); // Error handler
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);

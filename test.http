@@ -60,3 +60,12 @@ DELETE {{baseUrl}}/posts/999
 
 ### 404
 GET {{baseUrl}}/non-existent
+
+### 415 - Unsupported charset (error handler middleware)
+POST {{baseUrl}}/posts
+Content-Type: application/json; charset=iso-8859-1
+
+{}
+
+### 500 - Internal Server Error (error handler middleware)
+GET {{baseUrl}}/errors
